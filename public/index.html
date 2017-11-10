@@ -1,0 +1,715 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Full Stack JavaScript</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="author" content="Thomas A. Valletta" />
+  <link href="css/impress.css" rel="stylesheet" />
+  <link href="css/prism.css" rel="stylesheet" />
+  <style>
+    @font-face {
+      font-family: 'QlassikMediumRegular';
+      src: url('css/font/Qlassik-Medium/Qlassik_TB-webfont.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+
+    }
+
+    @font-face {
+      font-family: 'QlassikBoldRegular';
+      src: url('css/font/Qlassik-Medium/QlassikBold_TB-webfont.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+
+    }
+
+    @font-face {
+      font-family: 'Typewriter';
+      src: url('css/font/Typewriter/veteran_typewriter-webfont.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'fira_code';
+      src: url('css/font/firacode_regular_macroman/FiraCode-Regular-webfont.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'fira_codeMedium';
+      src: url('css/font/firacode_medium_macroman/FiraCode-Medium-webfont.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'fira_codeBold';
+      src: url('css/font/firacode_bold_macroman/FiraCode-Bold-webfont.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    .step {
+      font-size: 2em;
+    }
+
+    .step.nofade {
+      opacity: 1;
+    }
+
+    .step.invis {
+      opacity: 0;
+    }
+
+    .step.invis.active {
+      opacity: 1;
+    }
+
+    h1 {
+      font-size: 128px;
+      font-weight: bold;
+      line-height: 164px;
+      text-shadow: 1px 1px 2px #16324F;
+      color: #FF8700;
+    }
+
+    h2 {
+      font-size: 96px;
+      line-height: 96px;
+      color: #2A628F;
+    }
+
+    h3 {
+      font-size: 64px;
+      line-height: 64px;
+      color: #16324F;
+    }
+
+    h4 {
+      font-size: 48px;
+      line-height: 48px;
+      color: #13293D;
+    }
+
+    h5 {
+      font-size: 32px;
+      line-height: 32px;
+    }
+
+    h6 {
+      font-size: 24px;
+      line-height: 24px;
+    }
+
+    hr {
+      border-color: #FFBC42;
+    }
+
+    .small {
+      font-size: 36px;
+      color: #2A628F;
+    }
+
+    .x-small {
+      font-size: 30px;
+      color: #16324F;
+    }
+
+    .xx-small {
+      font-size: 24px;
+      color: #13293D;
+    }
+
+    .xxx-small {
+      font-size: 18px;
+      color: #13293D;
+    }
+
+    .right {
+      float: right;
+      width: 320px;
+    }
+
+    .left {
+      float: left;
+      width: 320px;
+    }
+
+    em {
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    .blink {
+      animation: blinker 1s linear infinite;
+    }
+
+    @keyframes blinker {  
+      50% { opacity: 0; }
+    }
+
+    #voter {
+      opacity: 0;
+      transition: opacity .2s ease-in-out;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+    }
+
+    .answer {
+
+    }
+
+    .answer > span {
+      border-radius: 4px;
+      margin: 0 11px;
+      padding: 7px 7px 4px 9px;
+    }
+
+    .red { background-color: red; }
+    .yellow { background-color: yellow; }
+    .green { background-color: green; }
+    .blue { background-color: blue; }
+    
+    .side-by-side {
+      width: 800px;
+    }
+    .side-by-side > .left, .side-by-side > .right {
+      width: 390px;
+      font-size: .6em;
+    }
+
+    .thin-inline-code code {
+      font-size: .7em;
+      padding: 4px 11px 0 11px !important;
+    }
+
+  </style>
+</head>
+
+<body>
+  <p class="fallback-message">
+    Your browser doesn't support impress.js. Try Chrome or Safari.
+  </p>
+  <div id="impress">
+
+    <div id="title" class="step stay" data-x="0" data-y="0">
+      <h1 style="text-align: center">JavaScript<br/>Scopes</h1>
+    </div>
+    
+    <div id="description" class="step stay" data-x="0" data-y="1000">
+      <h2 style="font-family: Typewriter; text-align: center">The visibility and accessibility of a variable from a location in your code</h2>
+    </div>
+
+    <div class="step stay skip" data-x="550" data-y="1800" data-z="-1000" data-rotate-y="-45" data-rotate-z="5">
+      <img src='img/voter.png' />
+    </div>
+  
+    <div id="participation" class="step stay" data-x="0" data-y="2000">
+      <h1>Participate</h1>
+      <h2>http://bit.ly/98yfaeoijl</h2>
+    </div>
+  
+
+    <!-- ONE -->
+
+    <div class="step stay" data-x="0" data-y="3000">
+      <h2>One: The Interview</h2>
+      <pre><code class="language-js">for (var i = 0; i < 5; i++) {
+  setTimeout(function() {
+    console.log(i)
+  }, 0)
+}</code></pre>
+    </div>
+
+    <div class="step invis" data-x="-100" data-y="3000" data-z="250" data-rotate-y="-55">
+      <div class="right">
+        <h4>What will be output on the console?</h4>
+        <div class="answer"><span class="red">A.</span>1, 2, 3, 4, 5</div>
+        <div class="answer"><span class="yellow">B.</span>0, 1, 2, 3, 4</div>
+        <div class="answer"><span class="green">C.</span>4, 4, 4, 4, 4</div>
+        <div class="answer"><span class="blue">D.</span>5, 5, 5, 5, 5</div>
+      </div>
+    </div>
+  
+    <div class="step invis" data-x="100" data-y="3000" data-z="250" data-rotate-y="55">
+      <div class="left">
+        <h4>Correct answer:</h4>
+        <div class="answer"><span class="blue">D.</span>5, 5, 5, 5, 5</div>
+        <br/>
+        <h4>Why:</h4>
+        <h5>The function in the timeout does not get executed until the for loop is exhausted</h5>
+      </div>
+    </div>
+
+    <div class="step invis" data-x="1000" data-y="3000">
+      <div class="side-by-side">
+        <div class="left">
+          <h4>Original</h3>
+          <pre><code class="language-js">for (var i = 0; i < 5; i++) {
+  setTimeout(function() {
+    console.log(i)
+  }, 0)
+}</code></pre>
+        </div>  
+        <div class="right">
+          <h4>Fix One: </h3>
+          <pre><code class="language-js">for (var i = 0; i < 5; i++) {
+  setTimeout((function(x) {
+    console.log(x)
+  })(i), 0)
+}</code></pre>
+          <h5>An <em>Immediately Invoked</em> function creates a new scope</h5>
+        </div>
+      </div>
+    </div>
+
+    <div class="step invis" data-x="2000" data-y="3000">
+      <div class="side-by-side">
+        <div class="left">
+          <h4>Original</h3>
+          <pre><code class="language-js">for (var i = 0; i < 5; i++) {
+  setTimeout(function() {
+    console.log(i)
+  }, 0)
+}</code></pre>
+        </div>  
+        <div class="right">
+          <h4>Fix Two: </h3>
+          <pre><code class="language-js">for (let i = 0; i < 5; i++) {
+  setTimeout(function() {
+    console.log(i)
+  }, 0)
+}</code></pre>
+          <h5>Using <em>let</em> works because the five instances of the function each refer to different instances of <em>i</em></h5>
+        </div>
+      </div>
+    </div>
+  
+
+    <!-- TWO -->
+
+    <div class="step stay" data-x="0" data-y="4000">
+      <h2>Two: Easy Peasy?</h2>
+      <pre><code class="language-js">var a = 1;
+var b = 2;
+if (a === 1) {
+  var a = 11
+  let b = 22
+  console.log(a)
+  console.log(b)
+} 
+console.log(a)
+console.log(b)
+</code></pre>
+    </div>
+
+    <div class="step invis" data-x="-100" data-y="4000" data-z="250" data-rotate-y="-55">
+      <div class="right">
+        <h4>What will be output on the console?</h4>
+        <div class="answer"><span class="red">A.</span>11, 22, 11, 2</div>
+        <div class="answer"><span class="yellow">B.</span>11, 22, 1, 2</div>
+        <div class="answer"><span class="green">C.</span>11, 22, 11, 22</div>
+        <div class="answer"><span class="blue">D.</span>Reference Error!</div>
+      </div>
+    </div>
+  
+    <div class="step invis" data-x="100" data-y="4000" data-z="250" data-rotate-y="55">
+      <div class="left">
+        <h4>Correct answer:</h4>
+        <div class="answer"><span class="blue">A.</span>11, 22, 11, 2</div>
+        <br/>
+        <h4>Why:</h4>
+        <h5>The <em>var</em> in JavaScript is not scoped by blocks ({}) only by functions. The <em>let</em> in JavaScript is unique per block</h5>
+      </div>
+    </div>
+
+
+    <!-- THREE -->
+
+    <div class="step stay" data-x="0" data-y="5000">
+      <h2>Three: Let there be foo</h2>
+      <pre><code class="language-js">function test() {
+  var foo = 33
+  if (true) {
+    let foo = (foo + 55)
+    console.log(foo)
+  }
+}
+test()</code></pre>
+    </div>
+
+    <div class="step invis" data-x="-100" data-y="5000" data-z="250" data-rotate-y="-55">
+      <div class="right">
+        <h4>What will be output on the console?</h4>
+        <div class="answer"><span class="red">A.</span>88</div>
+        <div class="answer"><span class="yellow">B.</span>55</div>
+        <div class="answer"><span class="green">C.</span>33</div>
+        <div class="answer"><span class="blue">D.</span>Reference Error!</div>
+      </div>
+    </div>
+  
+    <div class="step invis" data-x="100" data-y="5000" data-z="250" data-rotate-y="55">
+      <div class="left">
+        <h4>Correct answer:</h4>
+        <div class="answer"><span class="blue">D.</span>Reference Error!</div>
+        <br/>
+        <h4>Why:</h4>
+        <h5>In JavaScript the <em>Temporal Dead Zone</em> exists for a let that has not been declared resulting in a Reference Error. In the lexical scope of the if block, <em>foo</em> has been created but not initialized when <em>(foo + 55)</em> is evaluated.</h5>
+      </div>
+    </div>
+
+    <div class="step invis" data-x="1000" data-y="5000">
+      <div class="side-by-side">
+        <div class="left">
+          <h4>Original</h3>
+          <pre><code class="language-js">function test() {
+  var foo = 33
+  if (true) {
+    let foo = (foo + 55)
+    console.log(foo)
+  }
+}
+test()</code></pre>
+        </div>  
+        <div class="right">
+          <h4>Fix One: </h3>
+          <pre><code class="language-js">function test() {
+  var foo = 33
+  if (true) {
+    let bar = (foo + 55)
+    console.log(bar)
+  }
+}
+test()</code></pre>
+          <h5>Using the same variable name in nested scopes is probably going to cause confusion. Just rename or reuse.</h5>
+        </div>
+      </div>
+    </div>
+
+    <div class="step invis" data-x="2000" data-y="5000">
+      <div class="side-by-side">
+        <div class="left">
+          <h4>Original</h3>
+          <pre><code class="language-js">function test() {
+  var foo = 33
+  if (true) {
+    let foo = (foo + 55)
+    console.log(foo)
+  }
+}
+test()</code></pre>
+        </div>  
+        <div class="right">
+          <h4>Fix Two: </h3>
+          <pre><code class="language-js">function test() {
+  var foo = 33
+  if (true) {
+    console.log(foo += 55)
+  }
+}
+test()</code></pre>
+        </div>
+      </div>
+    </div>
+    
+
+    <!-- FOUR -->
+
+    <div class="step stay" data-x="0" data-y="6000">
+      <h2>Four: Contextual Scope</h2>
+      <pre style="font-size: 0.9em"><code class="language-js">const thing = {
+  name: 'Something',
+  hello: function() {
+    console.log(`Hello, ${this}`)
+  },
+  toString: function() {
+    return this.name
+  }
+}
+const sayHello = thing.hello
+sayHello()</code></pre>
+    </div>
+
+    <div class="step invis" data-x="-100" data-y="6000" data-z="250" data-rotate-y="-55">
+      <div class="right" style="font-size: .95em">
+        <h4>What will be output on the console?</h4>
+        <div class="answer"><span class="red">A.</span>Hello, Something</div>
+        <div class="answer"><span class="yellow">B.</span>Hello, [object Object]</div>
+        <div class="answer"><span class="green">C.</span>Hello, [object Window]</div>
+        <div class="answer"><span class="blue">D.</span>Hello, {name: "Something", hello: ƒ, toString: ƒ}</div>
+      </div>
+    </div>
+  
+    <div class="step invis" data-x="100" data-y="6000" data-z="250" data-rotate-y="55">
+      <div class="left thin-inline-code">
+        <h4>Correct answer:</h4>
+        <div class="answer">C.</span>Hello, [object Window]</div>
+        <br/>
+        <h4>Why:</h4>
+        <h5>In node the answer would be "Hello, [object global]" because the global object replaces the window object. When a function is called from its parent (e.g. <code class="language-js">thing.hello()</code>) it is like using <em>call</em> (e.g. <code class="language-js">hello.call(thing)</code>). But when a function is passed or stored as a variable, only the function itself is stored.</h5>
+      </div>
+    </div>
+
+    <div class="step invis" data-x="1000" data-y="6000">
+      <div class="side-by-side">
+        <div class="left">
+          <h4>Original</h3>
+          <pre><code class="language-js">const thing = {
+  name: 'Something',
+  hello: function() {
+    console.log(`Hello, ${this}`)
+  },
+  toString: function() {
+    return this.name
+  }
+}
+const sayHello = thing.hello
+sayHello()</code></pre>
+        </div>  
+        <div class="right">
+          <h4>Fix One: </h3>
+          <pre><code class="language-js">const thing = {
+  name: 'Something',
+  hello: function() {
+    console.log(`Hello, ${this}`)
+  },
+  toString: function() {
+    return this.name
+  }
+}
+const sayHello = thing.hello
+sayHello.call(thing)</code></pre>
+          <h5>Use <em>call</em> or <em>apply</em>.</h5>
+        </div>
+      </div>
+    </div>
+
+    <div class="step invis" data-x="2000" data-y="6000">
+      <div class="side-by-side">
+        <div class="left">
+          <h4>Original</h3>
+          <pre><code class="language-js">const thing = {
+  name: 'Something',
+  hello: function() {
+    console.log(`Hello, ${this}`)
+  },
+  toString: function() {
+    return this.name
+  }
+}
+const sayHello = thing.hello
+sayHello()</code></pre>
+        </div>  
+        <div class="right">
+          <h4>Fix Two: </h3>
+          <pre><code class="language-js">const thing = {
+  name: 'Something',
+  hello: function() {
+    console.log(`Hello, ${this}`)
+  },
+  toString: function() {
+    return this.name
+  }
+}
+const sayHello = thing.hello
+sayHello.bind(thing)()</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="step invis" data-x="600" data-y="600"  data-z="200" data-rotate-x="-16" data-rotate-y="65"  data-rotate-z="-45">
+      <div class="right">
+        <br />
+        <br />
+        <br />
+        <br />
+        <h3>Thanks</h3>
+        Thomas A. Valletta
+        <h5 style="color: yellow">@tvalletta</h5>
+      </div>
+    </div>
+        
+  </div>
+
+  <div id="voter" width="200" height="200"></div>
+
+  <script type="text/javascript" src="js/impress.js"></script>
+  <script type='text/javascript' src="/socket.io/socket.io.js"></script>
+  <script type='text/javascript' src="js/prism.js"></script>
+  <script type='text/javascript' src="js/d3.v3.min.js"></script>
+  <script type='text/javascript' src="js/stack-vis.js"></script>
+  <script type='text/javascript' src="js/voter-pie.js"></script>
+
+  <script>
+    var socket = io()
+    var el = document.getElementById("impress");
+
+    let sv
+    var hidden = [];
+    var shown = [];
+    var highlighted = [];
+    var faded = [];
+
+    el.addEventListener("impress:stepenter", function (event) {
+
+      // --- stay ---
+      if (event.target.classList.contains('stay')) {
+        event.target.style.opacity = 1;
+      }
+
+      // --- data-show ---
+      if (event.target.hasAttribute('data-show')) {
+        var showList = event.target.getAttribute('data-show').split(' ');
+        for (var i = 0; i < showList.length; ++i) {
+          var $el = document.getElementById(showList[i]);
+          shown.push({ el: $el, opacity: $el.style.opacity });
+          $el.style.opacity = 1;
+        }
+      }
+
+      // --- data-hide ---
+      if (event.target.hasAttribute('data-hide')) {
+        var hideList = event.target.getAttribute('data-hide').split(' ');
+        for (var i = 0; i < hideList.length; ++i) {
+          var $el = document.getElementById(hideList[i]);
+          hidden.push({ el: $el, opacity: $el.style.opacity });
+          $el.style.opacity = 0;
+        }
+      }
+
+      // --- data-highlight ---
+      if (event.target.hasAttribute('data-highlight')) {
+        var highlightList = event.target.getAttribute('data-highlight').split(' ');
+        for (var i = 0; i < highlightList.length; ++i) {
+          var $el = document.getElementById(highlightList[i]);
+          highlighted.push($el);
+          $el.style['text-shadow'] = '0 0 5px white, 0 0 10px white, 0 0 30px white';
+        }
+      }
+
+      // --- data-fade ---
+      if (event.target.hasAttribute('data-fade')) {
+        var fadeList = event.target.getAttribute('data-fade').split(' ')
+        for (var i = 0; i < fadeList.length; ++i) {
+          var $el = document.getElementById(fadeList[i])
+          faded.push({ el: $el, opacity: $el.style.opacity })
+          $el.style.opacity = 0.2
+        }
+      }
+
+      // === CUSTOM CRAP ===z===z===z===z===z===z===z===z===z===z===z===z===z===
+
+      // --- data-show-stack ---
+      if (event.target.hasAttribute('data-show-stack')) {
+        const cfg = {
+          $el: event.target,
+          dataset: [],
+          dequeue: {
+            interval: 16,
+            count: .1
+          },
+          slow: 1
+        }
+        for (var i = 0; i < 100; ++i) {
+          cfg.dataset[i] = {
+            x: (Math.random() * 360) + 20,
+            y: (Math.random() * 560) + 20,
+            delay: i * 40
+          }
+        }
+        sv = runStackVisualization(cfg)
+      }
+      // --- data-show-stack ---
+
+    }, false)
+
+    el.addEventListener("impress:stepleave", function (event) {
+
+      // --- data-show ---
+      if (hidden.length) {
+        for (var i = 0; i < shown.length; ++i) {
+          shown[i].el.style.opacity = shown[i].opacity
+        }
+        shown = [];
+      }
+
+      // --- data-hide ---
+      if (hidden.length) {
+        for (var i = 0; i < hidden.length; ++i) {
+          hidden[i].el.style.opacity = hidden[i].opacity
+        }
+        hidden = [];
+      }
+
+      // --- data-highlighted ---
+      if (highlighted.length) {
+        for (var i = 0; i < highlighted.length; ++i) {
+          highlighted[i].style['text-shadow'] = 'none'
+        }
+        highlighted = [];
+      }
+
+      // --- data-faded ---
+      if (faded.length) {
+        for (var i = 0; i < faded.length; ++i) {
+          faded[i].el.style.opacity = faded[i].opacity
+        }
+        faded = []
+      }
+
+      // === CUSTOM CRAP ===z===z===z===z===z===z===z===z===z===z===z===z===z===
+
+      // --- data-show-stack ---
+      if (event.target.hasAttribute('data-show-stack')) {
+        let $svg = event.target.querySelector('svg')
+        $svg.remove()
+      }
+
+    }, false)
+
+    document.addEventListener("impress:init", function (event) {
+
+    })
+
+    impress().init()
+
+    // MWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMW
+    // --- VOTER STUFF ---
+    // MWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMW
+
+    const $voter = document.getElementById('voter')
+    const voter = voterPie({ $el: $voter })
+    document.addEventListener('keydown', event => {
+      switch (event.key) {
+        case 's':
+          $voter.style.opacity = 1
+          break
+        case 'h':
+          $voter.style.opacity = 0
+          break
+        case 'r':
+          console.log('reset()')
+          socket.emit('reset')
+          break
+      }
+    })
+
+    socket.on('ack', msg => {
+      console.log(msg)
+      socket.emit('register', 'reporter')
+    })
+
+    socket.on('update', data => {
+      console.log(data)
+      voter.update(data)
+      // voterPie({ $el: $voter, data })
+    })
+
+</script>
+</body>
+
+</html>
