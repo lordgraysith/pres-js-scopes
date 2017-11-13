@@ -1,4 +1,2 @@
-# [Presentation: JavaScript Scoping](https://tvalletta.github.io/pres-js-scopes/)
+# [Presentation: JavaScript Scopes](https://js-scopes.now.sh)
 ### By Thomas A. Valletta
-
-https://tvalletta.github.io/pres-js-scopes/ # pres-js-scopes
